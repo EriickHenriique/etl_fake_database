@@ -81,7 +81,8 @@ def database_random(param: int):
 
 
 
-print(database_random(10))
+
+print(database_random(100))
 
 
 
