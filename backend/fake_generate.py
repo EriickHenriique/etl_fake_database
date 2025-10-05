@@ -1,7 +1,7 @@
 from faker import Faker
 import random
 
-
+# Direcionando a Localidade da Biblioteca para PT-BR
 fake = Faker('pt_BR')
 
 
@@ -82,7 +82,6 @@ def database_random(param: int):
 
 
 
-print(database_random(100))
 
 
 
