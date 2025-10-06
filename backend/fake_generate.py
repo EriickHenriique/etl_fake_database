@@ -69,7 +69,6 @@ def database_random(param: int):
             "birthday_client": fake.date_of_birth(minimum_age=18, maximum_age=70),
             "job": fake.job(),
             "payment_type": payments_types(),
-            "price" : random.randint(1, 1000),
             "store" : random.randint(1, 12),
             "category": products[0],
             "product": products[1],
@@ -77,11 +76,3 @@ def database_random(param: int):
             "price": products[2]
         }) 
     return result
-
-
-
-
-
-
-
-

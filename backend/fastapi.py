@@ -13,12 +13,3 @@ async def gerar_compra(param: int):
         return {"error": "Número de Compras deve ser pelo menos 1"}
     
     return database_random(param)
-    
-
-
-
-        
-    
-
-
-

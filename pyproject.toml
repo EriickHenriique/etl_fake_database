@@ -7,5 +7,6 @@ requires-python = ">=3.13"
 dependencies = [
     "faker>=37.8.0",
     "fastapi>=0.118.0",
+    "pydantic>=2.11.10",
     "uvicorn>=0.37.0",
 ]
