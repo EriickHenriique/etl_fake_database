@@ -1,11 +1,24 @@
 from fastapi import FastAPI
 from backend.fake_generate import database_random
 
+#Chamando a Classe
 app = FastAPI()
 
-@app.get("/gerar_compra")
-async def root():
-    return database_random()
+
+#Criando API com retorno da Fake Database
+@app.get("/gerar_compra/{param}")
+async def gerar_compra(param: int):
+ 
+    if param < 1:
+        return {"error": "Número de Compras deve ser pelo menos 1"}
+    
+    return database_random(param)
+    
+
+
+
+        
+    
 
 
 
