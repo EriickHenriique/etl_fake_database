@@ -6,7 +6,7 @@ RUN pip install uv --no-cache-dir
 
 COPY pyproject.toml .
 
-RUN uv pip install --system . --no-deps-hash --frozen
+RUN uv pip install --system .
 
 EXPOSE 8000
 
