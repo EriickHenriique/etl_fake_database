@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Serviço 1: PostgreSQL Database
+  postgres:
+    image: postgres:latest
+    container_name: dcs-postgres
+    restart: always
+    environment:
+      # Variáveis essenciais para o Postgres
+      POSTGRES_USER: postgres # Mantenha seguro!
+      POSTGRES_PASSWORD: postgres # Mantenha seguro!
+      POSTGRES_DB: etl_fakedata
+    ports:
+      # Mapeamento de porta: HOST:CONTAINER (5432 é o padrão do Postgres)
+      - "5432:5432"
+    volumes:
+      # Garante que os dados do banco persistam mesmo que o container seja parado
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+
+  # Serviço 2: pgAdmin 4 (Ferramenta de Interface Gráfica)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: dcs-pgadmin
+    restart: always
+    environment:
+      # Credenciais de acesso ao pgAdmin (a interface web)
+      PGADMIN_DEFAULT_EMAIL: fake123@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres123
+    ports:
+      # Mapeamento de porta: HOST:CONTAINER (Acesso via browser)
+      - "5050:80" # Você acessará via http://localhost:8080
+    volumes:
+      # Volume para persistir as configurações do pgAdmin
+      - ./data/pgadmin:/var/lib/pgadmin
+    networks:
+      - postgres-network
+    depends_on:
+      - postgres # Garante que o Postgres suba antes do pgAdmin
+
+# Definição das Redes
+networks:
+  postgres-network:
+    driver: bridge
