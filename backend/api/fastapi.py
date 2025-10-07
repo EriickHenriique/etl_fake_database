@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.fake_generate import database_random
+from backend.data.fake_generate import database_random
 
 #Chamando a Classe
 app = FastAPI()

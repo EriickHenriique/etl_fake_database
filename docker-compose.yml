@@ -11,6 +11,7 @@ services:
       POSTGRES_USER: postgres 
       POSTGRES_PASSWORD: postgres 
       POSTGRES_DB: etl_fakedata
+      POSTGRES_HOST: postgres
     ports:
       - "5432:5432"
     volumes:

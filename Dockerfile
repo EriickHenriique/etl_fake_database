@@ -1,20 +1,15 @@
 FROM python:3.13 
 
-WORKDIR /app
+WORKDIR /app 
 
+RUN pip install uv --no-cache-dir 
 
-RUN pip install uv --no-cache-dir
+COPY pyproject.toml . 
 
-
-COPY pyproject.toml .
-
-
-RUN uv pip install --system . 
-
+RUN uv pip install --system .
 
 COPY . /app
 
 EXPOSE 8000
 
-
-CMD ["uvicorn", "backend.fastapi:app", "--app-dir", "/app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn" , "backend.fastapi:app", "--app-dir", "/app", "--host", "0.0.0.0", "--port", "8000"]
