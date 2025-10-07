@@ -1,46 +1,55 @@
 version: '3.8'
 
 services:
-  # Serviço 1: PostgreSQL Database
+  # Serviço 1: PostgreSQL 
   postgres:
     image: postgres:latest
     container_name: dcs-postgres
     restart: always
     environment:
-      # Variáveis essenciais para o Postgres
-      POSTGRES_USER: postgres # Mantenha seguro!
-      POSTGRES_PASSWORD: postgres # Mantenha seguro!
+      # Variáveis
+      POSTGRES_USER: postgres 
+      POSTGRES_PASSWORD: postgres 
       POSTGRES_DB: etl_fakedata
     ports:
-      # Mapeamento de porta: HOST:CONTAINER (5432 é o padrão do Postgres)
       - "5432:5432"
     volumes:
-      # Garante que os dados do banco persistam mesmo que o container seja parado
-      - ./data/postgres:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - postgres-network
 
-  # Serviço 2: pgAdmin 4 (Ferramenta de Interface Gráfica)
+  # Serviço 2: pgAdmin 4
   pgadmin:
     image: dpage/pgadmin4
     container_name: dcs-pgadmin
     restart: always
     environment:
-      # Credenciais de acesso ao pgAdmin (a interface web)
+      # Credenciais de acesso ao pgAdmin
       PGADMIN_DEFAULT_EMAIL: fake123@gmail.com
       PGADMIN_DEFAULT_PASSWORD: postgres123
     ports:
-      # Mapeamento de porta: HOST:CONTAINER (Acesso via browser)
-      - "5050:80" # Você acessará via http://localhost:8080
+      - "5050:80" 
     volumes:
       # Volume para persistir as configurações do pgAdmin
       - ./data/pgadmin:/var/lib/pgadmin
     networks:
       - postgres-network
     depends_on:
-      - postgres # Garante que o Postgres suba antes do pgAdmin
+      - postgres 
+  fastapi:
+    build: . 
+    container_name: dcs-fastapi
+    restart: always
+    ports:     
+      - "8000:8000"
+    networks:
+      - postgres-network 
 
 # Definição das Redes
 networks:
   postgres-network:
     driver: bridge
+
+# Definição dos Volumes Nomeados
+volumes:
+  postgres_data:

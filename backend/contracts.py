@@ -16,7 +16,3 @@ class CompraSchema(BaseModel):
     product: str
     brand: str
     price: float
-
-
-
-
