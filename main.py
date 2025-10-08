@@ -3,8 +3,8 @@ from backend.contracts.contracts import CompraSchema
 import time
 
 #Usando LocalHost do Docker
-api = 'http://localhost:8000/gerar_compra'
-db = f"postgresql+psycopg2://postgres:postgres@localhost:5432/etl_fakedata"
+api = 'http://fastapi:8000/gerar_compra'
+db = f"postgresql+psycopg2://postgres:postgres@postgres:5432/etl_fakedata"
 
 #Chamando a Classe APIOrchestrator e passando os parâmetros
 extract = APIOrchestrator(

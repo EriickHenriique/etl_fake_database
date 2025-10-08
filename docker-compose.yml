@@ -30,21 +30,42 @@ services:
       PGADMIN_DEFAULT_PASSWORD: postgres123
     ports:
       - "5050:80" 
-    volumes:
-      # Volume para persistir as configurações do pgAdmin
-      - ./data/pgadmin:/var/lib/pgadmin
     networks:
       - postgres-network
     depends_on:
       - postgres 
+  # Serviço 3: FastAPI
   fastapi:
     build: . 
     container_name: dcs-fastapi
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etl_fakedata
+      POSTGRES_HOST: postgres
     restart: always
     ports:     
       - "8000:8000"
     networks:
       - postgres-network 
+  # Serviço 4: ETL_Worker  
+  etl_worker:
+    build: . 
+    container_name: dcs-etl-worker
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etl_fakedata
+      POSTGRES_HOST: postgres
+
+    networks:
+      - postgres-network 
+
+    depends_on:
+      - postgres
+      - fastapi
+
+    command: ["/bin/bash", "-c", "while ! nc -z postgres 5432; do echo 'Aguardando Postgres...'; sleep 1; done; python main.py"]
 
 # Definição das Redes
 networks:
