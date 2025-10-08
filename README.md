@@ -1,6 +1,6 @@
 # 🚀 Pipeline ETL - Geração e Ingestão de Dados de Compras 🛍️
 
-[![Imagem](pipeline.png)]
+![Imagem](pipeline.png)
 
 Este projeto implementa um **Pipeline ETL (Extração, Transformação e Carga)** que simula a ingestão contínua de grandes volumes de dados de compras gerados por uma API Mock em um banco de dados **PostgreSQL**.
 
@@ -38,11 +38,11 @@ O pipeline segue um fluxo linear, encapsulado em contêineres Docker para facili
 | :---: | :---: | :---: |
 | **Linguagem** | Python 3.13 | Linguagem principal para ETL e API. |
 | **API** | **FastAPI**, **Uvicorn** | Criação da API de Geração de Dados. |
-| **Modelagem/Validação** | **Pydantic** | Definição do *Schema* (`CompraSchema`) e validação rigorosa dos dados. |
+| **Modelagem/Validação** | **Pydantic** | Definição do *Schema* (`CompraSchema`) e validação dos dados. |
 | **Database** | **PostgreSQL** | Banco de dados relacional para persistência de dados. |
 | **ORM/Conexão** | **SQLAlchemy** (Core) | Criação da tabela e inserção eficiente dos registros. |
 | **Infraestrutura** | **Docker**, **Docker Compose** | Empacotamento e orquestração dos serviços (DB, API, ETL Worker). |
-| **Geração de Dados** | **Faker** (pt\_BR) | Criação de dados de compras realistas em português. |
+| **Geração de Dados** | **Faker** (pt\_BR) | Criação de dados de compras em português. |
 
 ---
 
